@@ -11,7 +11,7 @@ public class Deck {
         for(int i = 0; i < 4; i++) {
             for(int j = 0; j < 13; j++) {
 		Card newCard = new Card(i, j);
-		cards.add(newCard); 
+		cards.add(newCard);
             }
 	}
 	shuffle(); 
