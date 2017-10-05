@@ -11,4 +11,10 @@ package UI;
  */
 public class UI {
     
+    public static void printWelcome(){
+        System.out.println("Bienvenido al Poker");
+        System.out.println("1. Comenzar el juego");
+        System.out.println("2. Instrucciones");
+        System.out.println("3. Salir");
+    }
 }
