@@ -1,4 +1,6 @@
 package Data;
+import BussinessLogic.Multiplier;
+import java.io.PrintStream;
 
 public class Game {
 		
@@ -15,7 +17,8 @@ public class Game {
 	Card card = deck.draw();
 	user.addCard(card);
     }
-    System.out.println("Tus cartas son\n");
+         
+    System.out.println("\nTus cartas son:\n");
     System.out.println(user.toString()); 
     user.rejectCards();	
     System.out.println();

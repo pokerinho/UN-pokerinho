@@ -6,6 +6,8 @@ import java.util.Scanner;
 
 
 public class Player {
+
+   
 	
     private final ArrayList<Card> hand = new ArrayList<>(); 
     private final Scanner input = new Scanner(System.in);
@@ -27,13 +29,17 @@ public class Player {
 
     public void rejectCards() {
 	int reject;
+        
 	String rejected = ""; 
-	System.out.println("¿Desear cambiar alguna carta? (1-Sí/0-No)");
+	System.out.println("\n¿Desear cambiar alguna carta? (1 - Sí / Cualquier tecla - No)");
 	reject = input.nextInt();
 		
 	if (reject ==1) {
-            System.out.println("¿Cuáles cartas deseas cambiar?");
-            rejected = input.next();	
+            System.out.println("\n¿Cuáles cartas deseas cambiar?");
+            rejected = input.next();
+{
+            
+        }
 	}
 	replace(rejected); 
 	}
@@ -45,7 +51,7 @@ public class Player {
 		Card card = Game.deck.draw();
 		hand.set(cardToRemove-1,card); 
             }
-            System.out.println("Tus nuevas cartas son\n");
+            System.out.println("\nTus nuevas cartas son: \n");
             System.out.println(toString());		
         }
     }
@@ -62,7 +68,7 @@ public class Player {
             }
 	}
 	boolean pair = false, twopair = false, threeofakind = false,straight = false,flush = false, fullhouse;
-        fullhouse = false;
+        
         boolean fourofakind = false, straightflush = false, 
         royalflush = false;			
         for (int k = 0; k<4; k++) { 
@@ -94,11 +100,11 @@ public class Player {
 	if (royalflush)
             return "¡Tienes una Flor Imperial!";
 	if (straightflush)
-            return "¡Tienes una Escalera de Color!!";
+            return "¡Tienes una Escalera de Color!";
 	if (fourofakind)
             return "¡Tienes un Póker!";
 	if (fullhouse)
-            return "¡Tienes un Full House!";
+            return "¡Tienes un Póker!";
 	if (flush)
             return "¡Tienes un Color!";
 	if (straight)

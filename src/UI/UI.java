@@ -1,17 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package UI;
 
 import BussinessLogic.Poker;
 import java.util.Scanner;
 
-/**
- *
- * @author wilder-eb
- */
+
 public class UI {
     
     public static void mainMenu(){
@@ -26,6 +19,7 @@ public class UI {
             }
             case 2:{
                 printInstructions();
+                        mainMenu();
                 break;
             }
             case 3:{
@@ -35,11 +29,11 @@ public class UI {
     }
     
     public static void printWelcome(){
-        System.out.println("Bienvenido a UN Pokerinho");
+        System.out.println("BIENVENIDO A UN POKERINHO\n");
         System.out.println("1. Comenzar el juego");
         System.out.println("2. Instrucciones");
         System.out.println("3. Salir");
-        System.out.print("Seleccione una opcion > ");
+        System.out.print("\nSelecciona una opción: \n");
     }
     
     public static void printInstructions(){
@@ -54,6 +48,21 @@ public class UI {
         System.out.println("Trío: Tres cartas del mismo número.");
         System.out.println("Dos Pares: Dos pares de números con diferentes pintas.");
         System.out.println("Par: Dos cartas del mismo número.");
-        System.out.println("Nada: Ninguna combinación anterior.");
+        System.out.println("Nada: Ninguna combinación anterior.\n");
+        System.out.println("2. Comenzarás con 100 créditos que podrás apostar.\n" +
+"Tu apuesta se multiplicará así:");
+        System.out.println("*********************************				\n" +
+"* Escalera Real		1-500	*\n" +
+"* Escalera de Color	1-200	*\n" +
+"* Póker			1-100	*\n" +
+"* Full House		1-50	*\n" +
+"* Color			1-20	*\n" +
+"* Escalera		1-10	*\n" +
+"* Trío			1-3	*\n" +
+"* Dos Pares		1-2	*\n" +
+"* Par			1-1	*\n" +
+"* Nada			1-0	*				\n" +
+"*********************************\n");
+        System.out.println("Entre más créditos tengas mejores premios podrás redimir.");
     }
 }
