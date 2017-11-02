@@ -1,5 +1,6 @@
-package Data;
+package BussinessLogic;
 
+import Data.Card;
 import java.util.ArrayList; 
 import java.util.Collections; 
 
