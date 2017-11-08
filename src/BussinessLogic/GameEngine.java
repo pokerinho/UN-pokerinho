@@ -49,10 +49,4 @@ public class GameEngine {
         } while (again == 1);
         System.out.println("\n¡Gracias por jugar!");
     }
-
-    private static class Int {
-
-        public Int() {
-        }
-    }
 }
