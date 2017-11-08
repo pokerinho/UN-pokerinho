@@ -39,4 +39,13 @@ public class UI {
                 + "*********************************\n");
         System.out.println("Entre más créditos tengas mejores premios podrás redimir.");
     }
+    
+    public static void askReject() {
+        System.out.println("\n¿Desear cambiar alguna carta? (1 - Sí / Cualquier tecla - No)");
+    }
+    
+    public static void askWhatReject() {
+        System.out.println("\n¿Cuáles cartas deseas cambiar?");
+    }
+    
 }
