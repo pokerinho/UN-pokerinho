@@ -1,4 +1,4 @@
-package BussinessLogic;
+package Data;
 
 import Data.Card;
 import java.util.ArrayList; 

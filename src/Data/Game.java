@@ -1,7 +1,6 @@
 package Data;
 
 import BussinessLogic.GameTable;
-import BussinessLogic.Deck;
 
 public class Game {
 
