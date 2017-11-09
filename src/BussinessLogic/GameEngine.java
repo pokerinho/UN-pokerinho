@@ -55,7 +55,7 @@ public class GameEngine {
             System.out.println(player.toString());
             rejectCards(input, deck, player);
             System.out.println();
-            System.out.println(GameTable.categorizeHand());
+            System.out.println(MoveHandler.categorizeHand(player));
             
             
             System.out.println();

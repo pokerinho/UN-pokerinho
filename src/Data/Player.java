@@ -21,8 +21,8 @@ public class Player {
         hand.add(card);
     }
     
-    public void getCard(int index){
-        hand.get(index);
+    public Card getCard(int index){
+        return hand.get(index);
     }
     
     public void setCard(int cardToRemove, Card card){
