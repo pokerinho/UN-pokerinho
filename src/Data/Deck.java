@@ -1,6 +1,4 @@
 package Data;
-
-import Data.Card;
 import java.util.ArrayList; 
 import java.util.Collections; 
 
@@ -17,7 +15,7 @@ public class Deck {
 	}
 	shuffle(); 
     }
-	
+
     public void shuffle() {
 	Collections.shuffle(cards); 
     }								

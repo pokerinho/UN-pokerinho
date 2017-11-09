@@ -1,55 +1,20 @@
 package BussinessLogic;
 
 import Data.Card;
-import Data.Game;
-import java.util.ArrayList;
-import java.util.Scanner;
-import UI.UI;
-
-
+import Data.Deck;
+import Data.Player;
 
 public class GameTable {
-
-    private final ArrayList<Card> hand = new ArrayList<>();
-    private final Scanner input = new Scanner(System.in);
 	
-    public void addCard(Card card) { 
-        hand.add(card);
-    }
-	
-    @Override
-    public String toString() {
-	String info = "";
-        info = hand.stream().map((card) -> card.toString() + "\n").reduce(info, String::concat);
-        return info;	
-    }
-
-    public void rejectCards() {
-	int reject;
-        
-	String rejected = ""; 
-	UI.askReject();
-	reject = input.nextInt();
-		
-	if (reject ==1) {
-            UI.askWhatReject();
-            rejected = input.next();
-{
-            
-        }
-	}
-	replace(rejected); 
-	}
-	
-    private void replace(String rejected) {
+    public static void replace(String rejected, Deck deck, Player player) {
 	if (!rejected.equals("")) { 
             for (int j=0; j<rejected.length(); j++) {									
 		int cardToRemove=Integer.parseInt(rejected.substring(j, j+1)); 
-		Card card = Game.deck.draw();
-		hand.set(cardToRemove-1,card); 
+		Card card = deck.draw();
+		player.setCard(cardToRemove-1,card);
             }
             System.out.println("\nTus nuevas cartas son: \n");
-            System.out.println(toString());		
+            System.out.println(player.toString());		
         }
     }
 	
