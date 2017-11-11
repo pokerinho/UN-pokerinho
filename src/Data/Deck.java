@@ -4,9 +4,10 @@ import java.util.Collections;
 
 public class Deck {
 	
-    private ArrayList<Card> cards = new ArrayList<Card>(); 
+    private final ArrayList<Card> cards;
 	
     public Deck() {
+        cards = new ArrayList<>(); 
         for(int i = 0; i < 4; i++) {
             for(int j = 0; j < 13; j++) {
 		Card newCard = new Card(i, j);

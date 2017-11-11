@@ -16,6 +16,22 @@ public class Player {
     private String playerName;
     private int credits;
     public final ArrayList<Card> hand = new ArrayList<>();
+
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
+    }
+
+    public int getCredits() {
+        return credits;
+    }
+
+    public void setCredits(int credits) {
+        this.credits = credits;
+    }
     
     public void addCard(Card card) { 
         hand.add(card);

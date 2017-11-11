@@ -8,8 +8,7 @@ import UI.UI;
 
 public class GameEngine {
     
-    private final Scanner input = new Scanner(System.in);
-    
+    private static final Scanner input = new Scanner(System.in);
     public static Deck deck = new Deck();
     public static Player player = new Player();
 
@@ -18,13 +17,11 @@ public class GameEngine {
     }
 
     public static void mainMenu() {
-        Scanner input = new Scanner(System.in);
         int again = 0;
-        UI.printWelcome();
-        int option = input.nextInt();
-        switch (option) {
+        UI.printMainMenu();
+        switch (UI.askMenuOption()) {
             case 1: {
-                startGame(again, input);
+                startGame(again);
                 break;
             }
             case 2: {
@@ -33,50 +30,31 @@ public class GameEngine {
                 break;
             }
             case 3: {
-                break;
+                System.exit(3);
             }
         }
     }
 
-    public static void startGame(int again, Scanner input) {
+    public static void startGame(int again) {
         do {
-            int Credit = 100;
-            System.out.printf("\nTienes %d créditos.\n", Credit);
-            System.out.println("¿Cuántos créditos quieres apostar?: ");
-            Scanner Bet = new Scanner(System.in);
-            int BetGame = Bet.nextInt();
-
-            
-            for (int i = 0; i < 5; i++) {
-                Card card = deck.draw();
-                player.addCard(card);
-            }
-            System.out.println("\nTus cartas son:\n");
-            System.out.println(player.toString());
-            rejectCards(input, deck, player);
+            UI.printCredits(player);
+            int Bet = UI.askBetAmount();
+            play();
             System.out.println();
-            System.out.println(MoveHandler.categorizeHand(player));
-            
-            
-            System.out.println();
-            //Credit=Credit+Multiplier.Credit(BetGame);
-            System.out.printf("\nAhora tienes %d créditos.\n", Credit);
-            System.out.println("\n¿Quieres jugar de nuevo? (1 - Sí / Cualquier tecla - No)");
-            again = input.nextInt();
+            UI.printCredits(player);
+            again = UI.askPlayAgain();
         } while (again == 1);
         System.out.println("\n¡Gracias por jugar!");
     }
     
-    public static void rejectCards(Scanner input, Deck deck, Player player) {
-        
-	int reject;
-	String rejected = ""; 
-	UI.askReject();
-	reject = input.nextInt();
-	if (reject == 1) {
-            UI.askWhatReject();
-            rejected = input.next();
-	}
-	GameTable.replace(rejected, deck, player);
+    public static void play(){
+        for (int i = 0; i < 5; i++) {
+                Card card = deck.draw();
+                player.addCard(card);
+        }
+        UI.printCards(player);
+        GameTable.rejectCards(input, deck, player);
+        System.out.println();
+        System.out.println(MoveHandler.categorizeHand(player));
     }
 }

@@ -1,10 +1,20 @@
 package BussinessLogic;
 
 import Data.Card;
-import Data.Deck;
 import Data.Player;
+import Data.Deck;
+import UI.UI;
+import java.util.Scanner;
 
 public class GameTable {
+    
+    public static void rejectCards(Scanner input, Deck deck, Player player) {
+	String rejected = "";
+	if (UI.askReject() == 1) {
+            rejected = UI.askWhatReject();
+	}
+	replace(rejected, deck, player);
+    }
 	
     public static void replace(String rejected, Deck deck, Player player) {
 	if (!rejected.equals("")) { 
@@ -13,8 +23,7 @@ public class GameTable {
 		Card card = deck.draw();
 		player.setCard(cardToRemove-1,card);
             }
-            System.out.println("\nTus nuevas cartas son: \n");
-            System.out.println(player.toString());		
+            UI.printNewCards(player);
         }
     }
 	

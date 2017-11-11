@@ -1,13 +1,22 @@
 package UI;
 
-public class UI {
+import Data.Player;
+import java.util.Scanner;
 
-    public static void printWelcome() {
+public class UI {
+    
+    private static final Scanner input = new Scanner(System.in);
+
+    public static void printMainMenu() {
         System.out.println("BIENVENIDO A UN POKERINHO\n");
         System.out.println("1. Comenzar el juego");
         System.out.println("2. Instrucciones");
         System.out.println("3. Salir");
         System.out.print("\nSelecciona una opción: \n");
+    }
+    
+    public static int askMenuOption(){
+        return input.nextInt();
     }
 
     public static void printInstructions() {
@@ -40,12 +49,37 @@ public class UI {
         System.out.println("Entre más créditos tengas mejores premios podrás redimir.");
     }
     
-    public static void askReject() {
+    public static int askReject() {
         System.out.println("\n¿Desear cambiar alguna carta? (1 - Sí / Cualquier tecla - No)");
+        return input.nextInt();
     }
     
-    public static void askWhatReject() {
+    public static String askWhatReject() {
         System.out.println("\n¿Cuáles cartas deseas cambiar?");
+        return input.next();
     }
     
+    public static void printCards(Player player){
+        System.out.println("\nTus cartas son:\n");
+            System.out.println(player.toString());
+    }
+    
+    public static void printNewCards(Player player){
+        System.out.println("\nTus nuevas cartas son: \n");
+            System.out.println(player.toString());
+    }
+    
+    public static void printCredits(Player player){
+        System.out.printf("\nTienes %d créditos.\n", player.getCredits());
+    }
+    
+    public static int askBetAmount(){
+        System.out.println("¿Cuántos créditos quieres apostar?: ");
+        return input.nextInt();
+    }
+    
+    public static int askPlayAgain(){
+        System.out.println("\n¿Quieres jugar de nuevo? (1 - Sí / Cualquier tecla - No)");
+        return input.nextInt();
+    }
 }

@@ -26,9 +26,7 @@ public class MoveHandler {
             }
 	}
 	boolean pair = false, twopair = false, threeofakind = false,straight = false,flush = false, fullhouse;
-        
-        boolean fourofakind = false, straightflush = false, 
-        royalflush = false;			
+        boolean fourofakind = false, straightflush = false, royalflush = false;			
         for (int k = 0; k<4; k++) { 
             if (player.getCard(k).getValue() == player.getCard(k+1).getValue()&& (k-1<0||player.getCard(k-1).getValue()!=player.getCard(k).getValue())&& (k+2>4||player.getCard(k+2).getValue()!=player.getCard(k).getValue())) {
 		if (pair == true) {
