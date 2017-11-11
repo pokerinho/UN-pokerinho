@@ -30,7 +30,7 @@ public class GameEngine {
                 break;
             }
             case 3: {
-                System.exit(3);
+                System.exit(0);
             }
         }
     }
