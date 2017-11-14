@@ -6,9 +6,14 @@ import java.util.Scanner;
 public class UI {
     
     private static final Scanner input = new Scanner(System.in);
+    
+    public static String printWelcome(){
+        System.out.println("BIENVENIDO A UN POKERINHO\n");
+        System.out.println("¿Cual es tu nombre?\n");
+        return input.nextLine();
+    }
 
     public static void printMainMenu() {
-        System.out.println("BIENVENIDO A UN POKERINHO\n");
         System.out.println("1. Comenzar el juego");
         System.out.println("2. Instrucciones");
         System.out.println("3. Salir");

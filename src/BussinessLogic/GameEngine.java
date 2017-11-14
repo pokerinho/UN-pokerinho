@@ -10,23 +10,24 @@ public class GameEngine {
     
     private static final Scanner input = new Scanner(System.in);
     public static Deck deck = new Deck();
-    public static Player player = new Player();
+    
 
     public static void main(String[] args) {
-        mainMenu();
+        Player player = new Player(UI.printWelcome());
+        mainMenu(player);
     }
 
-    public static void mainMenu() {
+    public static void mainMenu(Player player) {
         int again = 0;
         UI.printMainMenu();
         switch (UI.askMenuOption()) {
             case 1: {
-                startGame(again);
+                startGame(player, again);
                 break;
             }
             case 2: {
                 UI.printInstructions();
-                mainMenu();
+                mainMenu(player);
                 break;
             }
             case 3: {
@@ -35,11 +36,11 @@ public class GameEngine {
         }
     }
 
-    public static void startGame(int again) {
+    public static void startGame(Player player, int again) {
         do {
             UI.printCredits(player);
             int Bet = UI.askBetAmount();
-            play();
+            play(player);
             System.out.println();
             UI.printCredits(player);
             again = UI.askPlayAgain();
@@ -47,7 +48,8 @@ public class GameEngine {
         System.out.println("\n¡Gracias por jugar!");
     }
     
-    public static void play(){
+    public static void play(Player player){
+        player.newHand();
         for (int i = 0; i < 5; i++) {
                 Card card = deck.draw();
                 player.addCard(card);

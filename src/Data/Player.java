@@ -15,7 +15,12 @@ public class Player {
     
     private String playerName;
     private int credits;
-    public final ArrayList<Card> hand = new ArrayList<>();
+    public ArrayList<Card> hand;
+    
+    public Player(String playerName){
+        this.playerName = playerName;
+        this.credits = 100;
+    }
 
     public String getPlayerName() {
         return playerName;
@@ -43,6 +48,10 @@ public class Player {
     
     public void setCard(int cardToRemove, Card card){
         hand.set(cardToRemove, card);
+    }
+    
+    public void newHand(){
+        this.hand = new ArrayList<>();
     }
 	
     @Override

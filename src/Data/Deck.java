@@ -24,7 +24,6 @@ public class Deck {
     public Card draw() { 
 	Card returnCard = cards.get(0);  
 	cards.remove(0); 
-	return returnCard; 
-		
+	return returnCard;	
     }
 }

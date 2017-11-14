@@ -14,6 +14,37 @@ import Data.Player;
  */
 public class MoveHandler {
     
+    /*
+    
+    public static boolean isRoyalFlush(){
+    }
+    
+    public static boolean isStraightFlush(){
+    }
+    
+    public static boolean isFourOfAKind(){
+    }
+    
+    public static boolean isFullHouse(){
+    }
+    
+    public static boolean isFlush(){
+    }
+    
+    public static boolean isStraight(){
+    }
+    
+    public static boolean isThreeOfAKind(){
+    }
+    
+    public static boolean isTwoPair(){
+    }
+    
+    public static boolean isPair(){
+    }
+
+*/
+    
     public static String categorizeHand(Player player){ 
 	for (int i = 0; i<5; i++){ 
             for (int j = 0; j<4; j++) {
@@ -52,7 +83,7 @@ public class MoveHandler {
 				
                 }
 	}
-	fullhouse= threeofakind & pair; 
+	fullhouse= threeofakind & pair;
 	if (royalflush)
             return "¡Tienes una Flor Imperial!";
 	if (straightflush)
