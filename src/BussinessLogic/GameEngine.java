@@ -3,12 +3,10 @@ package BussinessLogic;
 import Data.Card;
 import Data.Deck;
 import Data.Player;
-import java.util.Scanner;
 import UI.UI;
 
 public class GameEngine {
     
-    private static final Scanner input = new Scanner(System.in);
     public static Deck deck = new Deck();
     
 
@@ -55,8 +53,8 @@ public class GameEngine {
                 player.addCard(card);
         }
         UI.printCards(player);
-        GameTable.rejectCards(input, deck, player);
+        GameTable.replace(deck, player);
         System.out.println();
-        System.out.println(MoveHandler.categorizeHand(player));
+        UI.printCategorizeHand(player);
     }
 }

@@ -15,7 +15,7 @@ public class Player {
     
     private String playerName;
     private int credits;
-    public ArrayList<Card> hand;
+    private ArrayList<Card> hand;
     
     public Player(String playerName){
         this.playerName = playerName;
@@ -36,6 +36,14 @@ public class Player {
 
     public void setCredits(int credits) {
         this.credits = credits;
+    }
+    
+    public ArrayList<Card> getHand() {
+        return hand;
+    }
+
+    public void setHand(ArrayList<Card> hand) {
+        this.hand = hand;
     }
     
     public void addCard(Card card) { 

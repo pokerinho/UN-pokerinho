@@ -2,12 +2,13 @@ package UI;
 
 import Data.Player;
 import java.util.Scanner;
+import BussinessLogic.MoveHandler;
 
 public class UI {
-    
+
     private static final Scanner input = new Scanner(System.in);
-    
-    public static String printWelcome(){
+
+    public static String printWelcome() {
         System.out.println("BIENVENIDO A UN POKERINHO\n");
         System.out.println("¿Cual es tu nombre?\n");
         return input.nextLine();
@@ -19,8 +20,8 @@ public class UI {
         System.out.println("3. Salir");
         System.out.print("\nSelecciona una opción: \n");
     }
-    
-    public static int askMenuOption(){
+
+    public static int askMenuOption() {
         return input.nextInt();
     }
 
@@ -53,38 +54,70 @@ public class UI {
                 + "*********************************\n");
         System.out.println("Entre más créditos tengas mejores premios podrás redimir.");
     }
-    
+
     public static int askReject() {
         System.out.println("\n¿Desear cambiar alguna carta? (1 - Sí / Cualquier tecla - No)");
         return input.nextInt();
     }
-    
+
     public static String askWhatReject() {
         System.out.println("\n¿Cuáles cartas deseas cambiar?");
         return input.next();
     }
-    
-    public static void printCards(Player player){
+
+    public static void printCards(Player player) {
         System.out.println("\nTus cartas son:\n");
-            System.out.println(player.toString());
+        System.out.println(player.toString());
     }
-    
-    public static void printNewCards(Player player){
+
+    public static void printNewCards(Player player) {
         System.out.println("\nTus nuevas cartas son: \n");
-            System.out.println(player.toString());
+        System.out.println(player.toString());
     }
-    
-    public static void printCredits(Player player){
+
+    public static void printCredits(Player player) {
         System.out.printf("\nTienes %d créditos.\n", player.getCredits());
     }
-    
-    public static int askBetAmount(){
+
+    public static int askBetAmount() {
         System.out.println("¿Cuántos créditos quieres apostar?: ");
         return input.nextInt();
     }
-    
-    public static int askPlayAgain(){
+
+    public static int askPlayAgain() {
         System.out.println("\n¿Quieres jugar de nuevo? (1 - Sí / Cualquier tecla - No)");
         return input.nextInt();
+    }
+
+    public static void printCategorizeHand(Player player) {
+        if (MoveHandler.categorizeHand(player) == 5000) {
+            System.out.println("¡Tienes una Flor Imperial!");
+        }
+        if (MoveHandler.categorizeHand(player) == 200) {
+            System.out.println("¡Tienes una Escalera de Color!");
+        }
+        if (MoveHandler.categorizeHand(player) == 100) {
+            System.out.println("¡Tienes un Póker!");
+        }
+        if (MoveHandler.categorizeHand(player) == 50) {
+            System.out.println("¡Tienes un Póker!");
+        }
+        if (MoveHandler.categorizeHand(player) == 20) {
+            System.out.println("¡Tienes un Color!");
+        }
+        if (MoveHandler.categorizeHand(player) == 10) {
+            System.out.println("¡Tienes una Escalera!");
+        }
+        if (MoveHandler.categorizeHand(player) == 3) {
+            System.out.println("¡Tienes un Trío!");
+        }
+        if (MoveHandler.categorizeHand(player) == 2) {
+            System.out.println("¡Tienes dos Pares!");
+        }
+        if (MoveHandler.categorizeHand(player) == 1) {
+            System.out.println("¡Tienes un Par!");
+        } else {
+            System.out.println("No tienes nada");
+        }
     }
 }
