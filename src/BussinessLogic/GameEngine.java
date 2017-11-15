@@ -4,27 +4,40 @@ import Data.Card;
 import Data.Deck;
 import Data.Player;
 import UI.UI;
+import UI.CLI;
 
 public class GameEngine {
     
     public static Deck deck = new Deck();
     
+    private static UI ui;
+    
+    private static void selectUI(String[] args) {
+        if (args.length == 0) {
+            ui = new CLI();
+        } else if (args[0].equals("text")) {
+            ui = new CLI();
+        } else {
+            ui = new CLI();
+        }
+    }
 
     public static void main(String[] args) {
-        Player player = new Player(UI.printWelcome());
+        selectUI(args);
+        Player player = new Player(ui.printWelcome());
         mainMenu(player);
     }
 
     public static void mainMenu(Player player) {
         int again = 0;
-        UI.printMainMenu();
-        switch (UI.askMenuOption()) {
+        ui.printMainMenu();
+        switch (ui.askMenuOption()) {
             case 1: {
                 startGame(player, again);
                 break;
             }
             case 2: {
-                UI.printInstructions();
+                ui.printInstructions();
                 mainMenu(player);
                 break;
             }
@@ -36,12 +49,12 @@ public class GameEngine {
 
     public static void startGame(Player player, int again) {
         do {
-            UI.printCredits(player);
-            int Bet = UI.askBetAmount();
+            ui.printCredits(player);
+            int Bet = ui.askBetAmount();
             play(player);
             System.out.println();
-            UI.printCredits(player);
-            again = UI.askPlayAgain();
+            ui.printCredits(player);
+            again = ui.askPlayAgain();
         } while (again == 1);
         System.out.println("\n¡Gracias por jugar!");
     }
@@ -52,9 +65,9 @@ public class GameEngine {
                 Card card = deck.draw();
                 player.addCard(card);
         }
-        UI.printCards(player);
-        GameTable.replace(deck, player);
+        ui.printCards(player);
+        GameTable.replace(ui, deck, player);
         System.out.println();
-        UI.printCategorizeHand(player);
+        ui.printCategorizeHand(player);
     }
 }

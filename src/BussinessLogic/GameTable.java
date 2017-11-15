@@ -7,10 +7,10 @@ import UI.UI;
 
 public class GameTable {
     
-    public static void replace(Deck deck, Player player) {
+    public static void replace(UI ui, Deck deck, Player player) {
         String rejected = "";
-	if (UI.askReject() == 1) {
-            rejected = UI.askWhatReject();
+	if (ui.askReject() == 1) {
+            rejected = ui.askWhatReject();
 	}
 	if (!rejected.equals("")) { 
             for (int j=0; j<rejected.length(); j++) {									
@@ -18,7 +18,7 @@ public class GameTable {
 		Card card = deck.draw();
 		player.setCard(cardToRemove-1,card);
             }
-            UI.printNewCards(player);
+            ui.printNewCards(player);
         }
     }
 	
