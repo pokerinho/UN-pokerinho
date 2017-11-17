@@ -8,7 +8,8 @@ import UI.CLI;
 
 public class GameEngine {
     
-    public static Deck deck = new Deck();
+    private static final Deck deck = new Deck();
+    private static Player player;
     
     private static UI ui;
     
@@ -24,42 +25,40 @@ public class GameEngine {
 
     public static void main(String[] args) {
         selectUI(args);
-        Player player = new Player(ui.printWelcome());
-        mainMenu(player);
+        player = new Player(ui.printWelcome(), 100);
+        mainMenu();
     }
 
-    public static void mainMenu(Player player) {
-        int again = 0;
-        ui.printMainMenu();
-        switch (ui.askMenuOption()) {
-            case 1: {
-                startGame(player, again);
+    public static void mainMenu() {
+        do{
+            ui.printMainMenu(player);
+            switch (ui.askMenuOption()) {
+                case 1: {
+                    startGame();
+                }
                 break;
-            }
-            case 2: {
-                ui.printInstructions();
-                mainMenu(player);
+                case 2: {
+                    ui.printInstructions();
+                }
                 break;
+                case 0: {
+                    System.exit(0);
+                }
             }
-            case 3: {
-                System.exit(0);
-            }
-        }
+        } while (true);
     }
 
-    public static void startGame(Player player, int again) {
-        do {
+    public static void startGame() {
             ui.printCredits(player);
-            int Bet = ui.askBetAmount();
-            play(player);
-            System.out.println();
+            int bet = ui.askBetAmount();
+            player.setCredits(-bet);
+            play();
+            bet *= MoveHandler.categorizeHand(player);
+            player.setCredits(bet);
             ui.printCredits(player);
-            again = ui.askPlayAgain();
-        } while (again == 1);
-        System.out.println("\n¡Gracias por jugar!");
     }
     
-    public static void play(Player player){
+    public static void play(){
         player.newHand();
         for (int i = 0; i < 5; i++) {
                 Card card = deck.draw();

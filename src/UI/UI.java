@@ -14,7 +14,7 @@ import Data.Player;
 public interface UI {
     
     public String printWelcome();
-    public void printMainMenu();
+    public void printMainMenu(Player player);
     public int askMenuOption();
     public void printInstructions();
     public int askReject();

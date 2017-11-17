@@ -16,15 +16,16 @@ public class CLI implements UI{
     }
 
     @Override
-    public void printMainMenu() {
+    public void printMainMenu(Player player) {
+        System.out.println("\nHola " + player.getPlayerName() + ":)\n");
         System.out.println("1. Comenzar el juego");
         System.out.println("2. Instrucciones");
-        System.out.println("3. Salir");
-        System.out.print("\nSelecciona una opción: \n");
+        System.out.println("0. Salir");
     }
 
     @Override
     public int askMenuOption() {
+        System.out.print("\nSelecciona una opción: \n");
         return input.nextInt();
     }
 
@@ -85,7 +86,7 @@ public class CLI implements UI{
 
     @Override
     public void printCredits(Player player) {
-        System.out.printf("\nTienes %d créditos.\n", player.getCredits());
+        System.out.printf("\nTienes %d créditos.\n\n", player.getCredits());
     }
 
     @Override
@@ -102,34 +103,38 @@ public class CLI implements UI{
 
     @Override
     public void printCategorizeHand(Player player) {
-        if (MoveHandler.categorizeHand(player) == 5000) {
-            System.out.println("¡Tienes una Flor Imperial!");
+        switch (MoveHandler.categorizeHand(player)) {
+            case 5000:
+                System.out.println("¡Tienes una Flor Imperial!");
+                break;
+            case 200:
+                System.out.println("¡Tienes una Escalera de Color!");
+                break;
+            case 100:
+                System.out.println("¡Tienes un Póker!");
+                break;
+            case 50:
+                System.out.println("¡Tienes un Póker!");
+                break;
+            case 20:
+                System.out.println("¡Tienes un Color!");
+                break;
+            case 10:
+                System.out.println("¡Tienes una Escalera!");
+                break;
+            case 3:
+                System.out.println("¡Tienes un Trío!");
+                break;
+            case 2:
+                System.out.println("¡Tienes dos Pares!");
+                break;
+            case 1:
+                System.out.println("¡Tienes un Par!");
+                break;
+            default:
+                System.out.println("No tienes nada");
+                break;
         }
-        if (MoveHandler.categorizeHand(player) == 200) {
-            System.out.println("¡Tienes una Escalera de Color!");
-        }
-        if (MoveHandler.categorizeHand(player) == 100) {
-            System.out.println("¡Tienes un Póker!");
-        }
-        if (MoveHandler.categorizeHand(player) == 50) {
-            System.out.println("¡Tienes un Póker!");
-        }
-        if (MoveHandler.categorizeHand(player) == 20) {
-            System.out.println("¡Tienes un Color!");
-        }
-        if (MoveHandler.categorizeHand(player) == 10) {
-            System.out.println("¡Tienes una Escalera!");
-        }
-        if (MoveHandler.categorizeHand(player) == 3) {
-            System.out.println("¡Tienes un Trío!");
-        }
-        if (MoveHandler.categorizeHand(player) == 2) {
-            System.out.println("¡Tienes dos Pares!");
-        }
-        if (MoveHandler.categorizeHand(player) == 1) {
-            System.out.println("¡Tienes un Par!");
-        } else {
-            System.out.println("No tienes nada");
-        }
+        System.out.println();
     }
 }
