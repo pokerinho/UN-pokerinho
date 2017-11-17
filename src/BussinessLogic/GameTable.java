@@ -8,10 +8,7 @@ import UI.UI;
 public class GameTable {
     
     public static void replace(UI ui, Deck deck, Player player) {
-        String rejected = "";
-	if (ui.askReject() == 1) {
-            rejected = ui.askWhatReject();
-	}
+        String rejected = ui.askReject();
 	if (!rejected.equals("")) { 
             for (int j=0; j<rejected.length(); j++) {									
 		int cardToRemove=Integer.parseInt(rejected.substring(j, j+1)); 

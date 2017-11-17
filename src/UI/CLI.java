@@ -61,15 +61,15 @@ public class CLI implements UI{
     }
 
     @Override
-    public int askReject() {
+    public String askReject() {
         System.out.println("\n¿Desear cambiar alguna carta? (1 - Sí / Cualquier tecla - No)");
-        return input.nextInt();
-    }
-
-    @Override
-    public String askWhatReject() {
-        System.out.println("\n¿Cuáles cartas deseas cambiar?");
-        return input.next();
+        if(input.nextInt() == 1){
+            System.out.println("\n¿Cuáles cartas deseas cambiar?");
+            return input.next();
+        }
+        else{
+            return "";
+        }
     }
 
     @Override

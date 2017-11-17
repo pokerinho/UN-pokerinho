@@ -17,8 +17,7 @@ public interface UI {
     public void printMainMenu(Player player);
     public int askMenuOption();
     public void printInstructions();
-    public int askReject();
-    public String askWhatReject();
+    public String askReject();
     public void printCards(Player player);
     public void printNewCards(Player player);
     public void printCredits(Player player);
