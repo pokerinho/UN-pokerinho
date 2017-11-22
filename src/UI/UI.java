@@ -22,7 +22,6 @@ public interface UI {
     public void printNewCards(Player player);
     public void printCredits(Player player);
     public int askBetAmount();
-    public int askPlayAgain();
     public void printCategorizeHand(Player player);
     
 }

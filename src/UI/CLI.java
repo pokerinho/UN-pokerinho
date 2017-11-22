@@ -96,12 +96,6 @@ public class CLI implements UI{
     }
 
     @Override
-    public int askPlayAgain() {
-        System.out.println("\n¿Quieres jugar de nuevo? (1 - Sí / Cualquier tecla - No)");
-        return input.nextInt();
-    }
-
-    @Override
     public void printCategorizeHand(Player player) {
         switch (MoveHandler.categorizeHand(player)) {
             case 5000:

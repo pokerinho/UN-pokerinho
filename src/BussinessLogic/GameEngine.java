@@ -29,7 +29,7 @@ public class GameEngine {
         mainMenu();
     }
 
-    public static void mainMenu() {
+    private static void mainMenu() {
         do{
             ui.printMainMenu(player);
             switch (ui.askMenuOption()) {
@@ -48,22 +48,22 @@ public class GameEngine {
         } while (true);
     }
 
-    public static void startGame() {
-            ui.printCredits(player);
-            int bet = ui.askBetAmount();
-            player.setCredits(-bet);
-            play();
-            bet *= MoveHandler.categorizeHand(player);
-            player.setCredits(bet);
-            ui.printCredits(player);
-    }
-    
-    public static void play(){
+    private static void startGame() {
+        ui.printCredits(player);
+        int bet = ui.askBetAmount();
+        player.setCredits(-bet);
         player.newHand();
         for (int i = 0; i < 5; i++) {
-                Card card = deck.draw();
-                player.addCard(card);
+            Card card = deck.draw();
+            player.addCard(card);
         }
+        play();
+        bet *= MoveHandler.categorizeHand(player);
+        player.setCredits(bet);
+        ui.printCredits(player);
+    }
+    
+    private static void play(){
         ui.printCards(player);
         GameTable.replace(ui, deck, player);
         System.out.println();

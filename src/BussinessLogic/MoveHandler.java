@@ -109,7 +109,6 @@ public class MoveHandler {
             return 10;
         }
         if (threeofakind) {
-
             return 3;
         }
         if (twopair) {
