@@ -5,7 +5,7 @@
  */
 package DAL;
 
-import Data.Player;
+import data.Player;
 import UI.UI;
 import java.io.File;
 import java.io.FileInputStream;

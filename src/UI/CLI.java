@@ -1,6 +1,6 @@
 package UI;
 
-import Data.Player;
+import data.Player;
 import java.util.Scanner;
 import businessLogic.MoveHandler;
 import java.util.InputMismatchException;

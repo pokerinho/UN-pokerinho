@@ -5,8 +5,8 @@
  */
 package businessLogic;
 
-import Data.Card;
-import Data.Player;
+import data.Card;
+import data.Player;
 
 /**
  *

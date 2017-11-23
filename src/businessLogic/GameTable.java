@@ -1,8 +1,8 @@
 package businessLogic;
 
-import Data.Card;
-import Data.Player;
-import Data.Deck;
+import data.Card;
+import data.Player;
+import data.Deck;
 import UI.UI;
 
 public class GameTable {

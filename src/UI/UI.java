@@ -5,7 +5,7 @@
  */
 package UI;
 
-import Data.Player;
+import data.Player;
 
 /**
  *

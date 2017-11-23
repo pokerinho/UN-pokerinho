@@ -1,9 +1,9 @@
 package businessLogic;
 
 import DAL.PlayerState;
-import Data.Card;
-import Data.Deck;
-import Data.Player;
+import data.Card;
+import data.Deck;
+import data.Player;
 import UI.UI;
 import UI.CLI;
 import java.io.IOException;
