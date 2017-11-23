@@ -13,15 +13,31 @@ import Data.Player;
  */
 public interface UI {
     
-    public String printWelcome();
+    public static final String ERROR_INVALID_INPUT = "Entrada incorrecta";
+    
+    public static final String ERROR_INCORRECT_OPTION = "Opcion incorrecta";
+    
+    public static final String ERROR_INCORRECT_BET = "La apuesta ingresada no se hizo en multiplos de 10 o supera la cantidad de créditos del jugador";
+    
+    public static final String ERROR_INCORRECT_INDEX = "Solo puedes cambiar cinco cartas";
+    
+    public static final String ERROR_IO = "Ocurrio un error";
+    
+    public static final String ERROR_INCORRECT_REJECT = "Solo puedes ingresar valores enteros entre 1 y 5";
+    
+    public void printWelcome();
     public void printMainMenu(Player player);
-    public int askMenuOption();
     public void printInstructions();
-    public String askReject();
     public void printCards(Player player);
     public void printNewCards(Player player);
     public void printCredits(Player player);
-    public int askBetAmount();
     public void printCategorizeHand(Player player);
-    
+    public void printSaved();
+    public void printLoaded();
+    public void printError(String error);
+    public String askName();
+    public int askMenuOption();
+    public int askBetAmount(Player player);
+    public int[] askReject();
+    public boolean printGameOver();
 }

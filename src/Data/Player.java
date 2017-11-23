@@ -6,12 +6,13 @@
 package Data;
 
 import java.util.ArrayList;
+import java.io.Serializable;
 
 /**
  *
  * @author wilder-eb
  */
-public class Player {
+public class Player implements Serializable {
     
     private String playerName;
     private int credits;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package BussinessLogic;
+package businessLogic;
 
 import Data.Card;
 import Data.Player;
@@ -14,36 +14,6 @@ import Data.Player;
  */
 public class MoveHandler {
 
-    /*
-    
-    public static boolean isRoyalFlush(){
-    }
-    
-    public static boolean isStraightFlush(){
-    }
-    
-    public static boolean isFourOfAKind(){
-    }
-    
-    public static boolean isFullHouse(){
-    }
-    
-    public static boolean isFlush(){
-    }
-    
-    public static boolean isStraight(){
-    }
-    
-    public static boolean isThreeOfAKind(){
-    }
-    
-    public static boolean isTwoPair(){
-    }
-    
-    public static boolean isPair(){
-    }
-
-     */
     public static int categorizeHand(Player player) {
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 4; j++) {
@@ -55,14 +25,14 @@ public class MoveHandler {
                 }
             }
         }
-        boolean pair = false, 
-                twopair = false, 
-                threeofakind = false, 
-                straight = false, 
-                flush = false, 
+        boolean pair = false,
+                twopair = false,
+                threeofakind = false,
+                straight = false,
+                flush = false,
                 fullhouse,
-                fourofakind = false, 
-                straightflush = false, 
+                fourofakind = false,
+                straightflush = false,
                 royalflush = false;
         for (int k = 0; k < 4; k++) {
             if (player.getCard(k).getValue() == player.getCard(k + 1).getValue() && (k - 1 < 0 || player.getCard(k - 1).getValue() != player.getCard(k).getValue()) && (k + 2 > 4 || player.getCard(k + 2).getValue() != player.getCard(k).getValue())) {

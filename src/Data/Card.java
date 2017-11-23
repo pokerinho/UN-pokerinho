@@ -1,12 +1,13 @@
 package Data;
 
-public class Card implements Comparable<Card> { 
+import java.io.Serializable;
+
+public class Card implements Comparable<Card>, Serializable{ 
 
     private final int suit;
     private final int value;
     private final static String[] suits = {"♥","♦","♣","♠"}; 
-    private final static String[] values = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
-												
+    private final static String[] values = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};											
 		
     public Card(int s, int v) {
 	suit = s;
