@@ -5,11 +5,13 @@
  */
 package UI;
 
+import data.Player;
+
 /**
  *
  * @author wilder-eb
  */
-public class GUI extends javax.swing.JFrame {
+public class GUI extends javax.swing.JFrame implements UI{
 
     /**
      * Creates new form GUI
@@ -71,4 +73,68 @@ public class GUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void printWelcome(){
+        
+    }
+    
+    @Override
+    public void printMainMenu(Player player){
+        
+    }
+    
+    @Override
+    public void printInstructions(){
+        
+    }
+    @Override
+    public void printCards(Player player){
+        
+    }
+    @Override
+    public void printNewCards(Player player){
+        
+    }
+    @Override
+    public void printCredits(Player player){
+        
+    }
+    @Override
+    public void printCategorizeHand(Player player){
+        
+    }
+    @Override
+    public void printSaved(){
+        
+    }
+    @Override
+    public void printLoaded(){
+        
+    }
+    @Override
+    public void printError(String error){
+        
+    }
+    @Override
+    public String askName(){
+        return "a";
+    }
+    @Override
+    public int askMenuOption(){
+        return 1;
+    }
+    @Override
+    public int askBetAmount(Player player){
+        return 1;
+    }
+    @Override
+    public int[] askReject(){
+        int[] reject = {0,0,0,0,0};
+        return reject;
+    }
+    @Override
+    public boolean printGameOver(){
+        return true;
+    }
 }
