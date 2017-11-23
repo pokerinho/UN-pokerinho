@@ -6,44 +6,36 @@
 package UI;
 
 import data.Player;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
  * @author wilder-eb
  */
-public class GUI extends javax.swing.JFrame implements UI{
+public class GUI extends javax.swing.JFrame implements UI {
 
-    /**
-     * Creates new form GUI
-     */
+    private String defaultInfoMessage = "BIENVENIDO A UN POKERINHO";
+    
     public GUI() {
-        initComponents();
-        
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        
-        this.setVisible(true);
+            initComponents();
+
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+
+            SwingUtilities.updateComponentTreeUI(this);
+            
+            this.pack();
+            this.setVisible(true);
+            
+        }
+         catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException exception) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, exception);
+        }
     }
 
     /**
@@ -73,68 +65,79 @@ public class GUI extends javax.swing.JFrame implements UI{
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
+    @Override
+    public void printWelcome() {
+
+    }
 
     @Override
-    public void printWelcome(){
-        
+    public void printMainMenu(Player player) {
+
     }
-    
+
     @Override
-    public void printMainMenu(Player player){
-        
+    public void printInstructions() {
+
     }
-    
+
     @Override
-    public void printInstructions(){
-        
+    public void printCards(Player player) {
+
     }
+
     @Override
-    public void printCards(Player player){
-        
+    public void printNewCards(Player player) {
+
     }
+
     @Override
-    public void printNewCards(Player player){
-        
+    public void printCredits(Player player) {
+
     }
+
     @Override
-    public void printCredits(Player player){
-        
+    public void printCategorizeHand(Player player) {
+
     }
+
     @Override
-    public void printCategorizeHand(Player player){
-        
+    public void printSaved() {
+
     }
+
     @Override
-    public void printSaved(){
-        
+    public void printLoaded() {
+
     }
+
     @Override
-    public void printLoaded(){
-        
+    public void printError(String error) {
+
     }
+
     @Override
-    public void printError(String error){
-        
-    }
-    @Override
-    public String askName(){
+    public String askName() {
         return "a";
     }
+
     @Override
-    public int askMenuOption(){
+    public int askMenuOption() {
         return 1;
     }
+
     @Override
-    public int askBetAmount(Player player){
+    public int askBetAmount(Player player) {
         return 1;
     }
+
     @Override
-    public int[] askReject(){
-        int[] reject = {0,0,0,0,0};
+    public int[] askReject() {
+        int[] reject = {0, 0, 0, 0, 0};
         return reject;
     }
+
     @Override
-    public boolean printGameOver(){
+    public boolean printGameOver() {
         return true;
     }
 }
