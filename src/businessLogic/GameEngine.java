@@ -6,21 +6,20 @@ import data.Deck;
 import data.Player;
 import UI.UI;
 import UI.CLI;
+import UI.GUI;
 import java.io.IOException;
-import java.util.InputMismatchException;
 
 public class GameEngine {
 
     private static final Deck deck = new Deck();
     private static Player player;
-
     private static UI ui;
 
     private static void selectUI(String[] args) {
         if (args.length == 0) {
             ui = new CLI();
-        } else if (args[0].equals("text")) {
-            ui = new CLI();
+        } else if (args[0].equals("gui")) {
+            ui = new GUI();
         } else {
             ui = new CLI();
         }
@@ -28,7 +27,8 @@ public class GameEngine {
 
     public static void main(String[] args) {
         selectUI(args);
-        do {
+        ui.printWelcome();
+        do { 
             player = new Player(ui.askName(), 100);
             mainMenu();
             eliminatePlayer();

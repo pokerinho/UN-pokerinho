@@ -17,7 +17,7 @@ public class CLI implements UI {
 
     @Override
     public void printMainMenu(Player player) {
-        System.out.println("\nHola " + player.getPlayerName() + "   :)\n");
+        System.out.println("\nHola " + player.getPlayerName() + " :)\n");
         System.out.println("1. Comenzar el juego");
         System.out.println("2. Instrucciones");
         System.out.println("3. Guardar estado");
@@ -126,8 +126,8 @@ public class CLI implements UI {
 
     @Override
     public void printError(String error) {
-        System.out.println(error);
-        System.out.println("Por favor intente de nuevo");
+        System.out.println("\n" + error);
+        System.out.println("Por favor intente de nuevo\n");
     }
 
     @Override
