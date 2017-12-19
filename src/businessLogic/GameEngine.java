@@ -17,7 +17,7 @@ public class GameEngine {
 
     private static void selectUI(String[] args) {
         if (args.length == 0) {
-            ui = new CLI();
+            ui = new GUI();
         } else if (args[0].equals("gui")) {
             ui = new GUI();
         } else {
@@ -27,8 +27,8 @@ public class GameEngine {
 
     public static void main(String[] args) {
         selectUI(args);
-        ui.printWelcome();
         do { 
+            ui.printWelcome();
             player = new Player(ui.askName(), 100);
             mainMenu();
             eliminatePlayer();
@@ -90,7 +90,7 @@ public class GameEngine {
     private static void play() {
         ui.printCards(player);
         GameTable.replace(ui, deck, player);
-        System.out.println();
+        ui.printCards(player);
         ui.printCategorizeHand(player);
     }
 

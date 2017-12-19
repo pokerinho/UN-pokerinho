@@ -16,6 +16,5 @@ public class GameTable {
                 player.setCard(cardToRemove - 1, card);
             }
         }
-        ui.printNewCards(player);
     }
 }

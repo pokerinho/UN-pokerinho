@@ -6,9 +6,10 @@
 package UI;
 
 import data.Player;
-import java.awt.Component;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JToggleButton;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -20,6 +21,9 @@ import javax.swing.UnsupportedLookAndFeelException;
 public class GUI extends javax.swing.JFrame implements UI {
 
     private String defaultInfoMessage = "BIENVENIDO A UN POKERINHO";
+    private String playerName = "";
+    private int selectedMenuOption;
+    private JToggleButton[] handUI;
     
     public GUI() {
         try {
@@ -32,7 +36,9 @@ public class GUI extends javax.swing.JFrame implements UI {
             SwingUtilities.updateComponentTreeUI(this);
             
             this.pack();
-            this.setVisible(true);
+            this.setVisible(false);
+            
+            handUI  = new JToggleButton[]{bCard1, bCard2, bCard3, bCard4, bCard5};
             
         }
          catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException exception) {
@@ -50,41 +56,48 @@ public class GUI extends javax.swing.JFrame implements UI {
     private void initComponents() {
 
         dPlayerName = new javax.swing.JDialog();
-        lWelcome = new javax.swing.JLabel();
+        pPlayerName = new javax.swing.JPanel();
         tInputName = new javax.swing.JTextField();
         bSetName = new javax.swing.JButton();
-        linfoMessage = new javax.swing.JLabel();
+        lWelcome = new javax.swing.JLabel();
         pGame = new javax.swing.JPanel();
-        jToggleButton1 = new javax.swing.JToggleButton();
-        jToggleButton3 = new javax.swing.JToggleButton();
-        jToggleButton4 = new javax.swing.JToggleButton();
-        jToggleButton5 = new javax.swing.JToggleButton();
-        jToggleButton2 = new javax.swing.JToggleButton();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        pBet = new javax.swing.JPanel();
+        jButton3 = new javax.swing.JButton();
+        cbBetAmount = new javax.swing.JComboBox<>();
+        lBetMessage = new javax.swing.JLabel();
+        pPlayer = new javax.swing.JPanel();
+        lPlayerName = new javax.swing.JLabel();
+        lCredits = new javax.swing.JLabel();
+        lCreditsIcon = new javax.swing.JLabel();
+        pHand = new javax.swing.JPanel();
+        bCard1 = new javax.swing.JToggleButton();
+        bCard2 = new javax.swing.JToggleButton();
+        bCard3 = new javax.swing.JToggleButton();
+        bCard4 = new javax.swing.JToggleButton();
+        bCard5 = new javax.swing.JToggleButton();
+        bRejectCards = new javax.swing.JButton();
+        linfoMessage = new javax.swing.JLabel();
+        pMenu = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jButton3 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
         mMenu = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        mFile = new javax.swing.JMenu();
+        mNewGame = new javax.swing.JMenuItem();
         mLoadState = new javax.swing.JMenuItem();
         mSaveState = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        mExit = new javax.swing.JMenuItem();
+        mHelp = new javax.swing.JMenu();
         mInstructions = new javax.swing.JMenuItem();
 
         dPlayerName.setAlwaysOnTop(true);
+        dPlayerName.setResizable(false);
+        dPlayerName.setSize(new java.awt.Dimension(398, 200));
 
-        lWelcome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lWelcome.setText("BIENVENIDO A UN POKERINHO");
+        pPlayerName.setBackground(new java.awt.Color(51, 102, 255));
 
         tInputName.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tInputName.setText("¿Cual es tu nombre?");
+        tInputName.setToolTipText("");
         tInputName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tInputNameActionPerformed(evt);
@@ -103,110 +116,212 @@ public class GUI extends javax.swing.JFrame implements UI {
             }
         });
 
+        lWelcome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lWelcome.setText("BIENVENIDO A UN POKERINHO");
+
+        javax.swing.GroupLayout pPlayerNameLayout = new javax.swing.GroupLayout(pPlayerName);
+        pPlayerName.setLayout(pPlayerNameLayout);
+        pPlayerNameLayout.setHorizontalGroup(
+            pPlayerNameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pPlayerNameLayout.createSequentialGroup()
+                .addGap(166, 166, 166)
+                .addComponent(bSetName)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pPlayerNameLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lWelcome, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(100, 100, 100))
+            .addGroup(pPlayerNameLayout.createSequentialGroup()
+                .addGap(47, 47, 47)
+                .addComponent(tInputName, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(55, Short.MAX_VALUE))
+        );
+        pPlayerNameLayout.setVerticalGroup(
+            pPlayerNameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pPlayerNameLayout.createSequentialGroup()
+                .addContainerGap(54, Short.MAX_VALUE)
+                .addComponent(lWelcome, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(tInputName, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(bSetName)
+                .addGap(24, 24, 24))
+        );
+
         javax.swing.GroupLayout dPlayerNameLayout = new javax.swing.GroupLayout(dPlayerName.getContentPane());
         dPlayerName.getContentPane().setLayout(dPlayerNameLayout);
         dPlayerNameLayout.setHorizontalGroup(
             dPlayerNameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dPlayerNameLayout.createSequentialGroup()
-                .addGroup(dPlayerNameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(dPlayerNameLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lWelcome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(dPlayerNameLayout.createSequentialGroup()
-                        .addGap(57, 57, 57)
-                        .addComponent(tInputName, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 51, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dPlayerNameLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(bSetName)
-                .addGap(160, 160, 160))
+            .addComponent(pPlayerName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         dPlayerNameLayout.setVerticalGroup(
             dPlayerNameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dPlayerNameLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lWelcome, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tInputName, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(bSetName)
-                .addContainerGap(18, Short.MAX_VALUE))
+            .addComponent(pPlayerName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("UN-Pokerinho");
+        setBackground(new java.awt.Color(255, 255, 255));
+        setBounds(new java.awt.Rectangle(0, 0, 0, 0));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setForeground(new java.awt.Color(255, 255, 255));
+        setMaximumSize(new java.awt.Dimension(820, 630));
+        setMinimumSize(new java.awt.Dimension(800, 600));
+        setSize(new java.awt.Dimension(800, 600));
+
+        pGame.setBackground(new java.awt.Color(153, 153, 153));
+
+        pBet.setBackground(new java.awt.Color(255, 51, 102));
+        pBet.setPreferredSize(new java.awt.Dimension(384, 105));
+
+        jButton3.setText("Apostar");
+        jButton3.setEnabled(false);
+
+        cbBetAmount.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbBetAmount.setEnabled(false);
+
+        lBetMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lBetMessage.setText("Apuesta");
+        lBetMessage.setEnabled(false);
+        lBetMessage.setOpaque(true);
+
+        javax.swing.GroupLayout pBetLayout = new javax.swing.GroupLayout(pBet);
+        pBet.setLayout(pBetLayout);
+        pBetLayout.setHorizontalGroup(
+            pBetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pBetLayout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(lBetMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(52, 52, 52)
+                .addComponent(cbBetAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(50, Short.MAX_VALUE))
+        );
+        pBetLayout.setVerticalGroup(
+            pBetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pBetLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pBetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbBetAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lBetMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23))
+        );
+
+        pPlayer.setBackground(new java.awt.Color(255, 51, 102));
+
+        lPlayerName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lPlayerName.setText("Jugador");
+        lPlayerName.setOpaque(true);
+
+        lCredits.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lCredits.setText("100");
+        lCredits.setOpaque(true);
+
+        lCreditsIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/Coin.png"))); // NOI18N
+        lCreditsIcon.setOpaque(true);
+
+        javax.swing.GroupLayout pPlayerLayout = new javax.swing.GroupLayout(pPlayer);
+        pPlayer.setLayout(pPlayerLayout);
+        pPlayerLayout.setHorizontalGroup(
+            pPlayerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pPlayerLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lPlayerName, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(68, 68, 68)
+                .addComponent(lCreditsIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lCredits, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(65, 65, 65))
+        );
+        pPlayerLayout.setVerticalGroup(
+            pPlayerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pPlayerLayout.createSequentialGroup()
+                .addContainerGap(40, Short.MAX_VALUE)
+                .addGroup(pPlayerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(lCredits, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lCreditsIcon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lPlayerName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(37, 37, 37))
+        );
+
+        pHand.setBackground(new java.awt.Color(51, 102, 255));
+        pHand.setToolTipText("");
+
+        bCard1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/back/back_d.png"))); // NOI18N
+        bCard1.setEnabled(false);
+
+        bCard2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/back/back_d.png"))); // NOI18N
+        bCard2.setEnabled(false);
+
+        bCard3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/back/back_d.png"))); // NOI18N
+        bCard3.setEnabled(false);
+        bCard3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bCard3ActionPerformed(evt);
+            }
+        });
+
+        bCard4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/back/back_d.png"))); // NOI18N
+        bCard4.setEnabled(false);
+        bCard4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bCard4ActionPerformed(evt);
+            }
+        });
+
+        bCard5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/back/back_d.png"))); // NOI18N
+        bCard5.setEnabled(false);
+
+        bRejectCards.setText("Cambiar");
+        bRejectCards.setEnabled(false);
+
+        javax.swing.GroupLayout pHandLayout = new javax.swing.GroupLayout(pHand);
+        pHand.setLayout(pHandLayout);
+        pHandLayout.setHorizontalGroup(
+            pHandLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pHandLayout.createSequentialGroup()
+                .addGroup(pHandLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pHandLayout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(bCard1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(bCard2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(bCard3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(bCard4, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(bCard5, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pHandLayout.createSequentialGroup()
+                        .addGap(352, 352, 352)
+                        .addComponent(bRejectCards)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        pHandLayout.setVerticalGroup(
+            pHandLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pHandLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(pHandLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(bCard5, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bCard2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bCard1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bCard3, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bCard4, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addComponent(bRejectCards, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24))
+        );
 
         linfoMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         linfoMessage.setText("Bienvenido");
+        linfoMessage.setMaximumSize(new java.awt.Dimension(800, 25));
+        linfoMessage.setMinimumSize(new java.awt.Dimension(800, 25));
+        linfoMessage.setOpaque(true);
+        linfoMessage.setPreferredSize(new java.awt.Dimension(800, 25));
 
-        jToggleButton1.setText("carta");
-
-        jToggleButton3.setText("carta");
-
-        jToggleButton4.setText("carta");
-
-        jToggleButton5.setText("carta");
-
-        jToggleButton2.setText("carta");
-
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("jugador");
-
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("100");
-
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("mano");
-
-        jLabel5.setText("cred");
-
-        javax.swing.GroupLayout pGameLayout = new javax.swing.GroupLayout(pGame);
-        pGame.setLayout(pGameLayout);
-        pGameLayout.setHorizontalGroup(
-            pGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pGameLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(pGameLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(pGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(pGameLayout.createSequentialGroup()
-                        .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jToggleButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jToggleButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(pGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(pGameLayout.createSequentialGroup()
-                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22))
-        );
-        pGameLayout.setVerticalGroup(
-            pGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pGameLayout.createSequentialGroup()
-                .addContainerGap(33, Short.MAX_VALUE)
-                .addGroup(pGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
-                .addGroup(pGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30))
-        );
+        pMenu.setBackground(new java.awt.Color(255, 51, 102));
 
         jButton1.setText("Nueva partida");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -217,78 +332,111 @@ public class GUI extends javax.swing.JFrame implements UI {
 
         jButton2.setText("Salir");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+        javax.swing.GroupLayout pMenuLayout = new javax.swing.GroupLayout(pMenu);
+        pMenu.setLayout(pMenuLayout);
+        pMenuLayout.setHorizontalGroup(
+            pMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pMenuLayout.createSequentialGroup()
+                .addGap(56, 56, 56)
                 .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addGap(49, 49, 49))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(26, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+        pMenuLayout.setVerticalGroup(
+            pMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pMenuLayout.createSequentialGroup()
+                .addContainerGap(24, Short.MAX_VALUE)
+                .addGroup(pMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24))
         );
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jButton3.setText("Apostar");
-
-        jLabel1.setText("Apuesta");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jLabel1)
-                .addGap(34, 34, 34)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addComponent(jButton3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        javax.swing.GroupLayout pGameLayout = new javax.swing.GroupLayout(pGame);
+        pGame.setLayout(pGameLayout);
+        pGameLayout.setHorizontalGroup(
+            pGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pGameLayout.createSequentialGroup()
+                .addComponent(linfoMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(pGameLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pGameLayout.createSequentialGroup()
+                        .addComponent(pBet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(pMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pHand, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pPlayer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3))
-                .addGap(22, 22, 22))
+        pGameLayout.setVerticalGroup(
+            pGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pGameLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pHand, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pGameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pBet, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+                    .addComponent(pMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(linfoMessage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jMenu1.setText("Archivo");
+        mFile.setText("Archivo");
 
+        mNewGame.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
+        mNewGame.setText("Nueva partida");
+        mNewGame.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mNewGameActionPerformed(evt);
+            }
+        });
+        mFile.add(mNewGame);
+
+        mLoadState.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
         mLoadState.setText("Cargar estado");
-        jMenu1.add(mLoadState);
+        mLoadState.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mLoadStateActionPerformed(evt);
+            }
+        });
+        mFile.add(mLoadState);
 
+        mSaveState.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
         mSaveState.setText("Guardar estado");
         mSaveState.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mSaveStateActionPerformed(evt);
             }
         });
-        jMenu1.add(mSaveState);
+        mFile.add(mSaveState);
 
-        mMenu.add(jMenu1);
+        mExit.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
+        mExit.setText("Salir");
+        mExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mExitActionPerformed(evt);
+            }
+        });
+        mFile.add(mExit);
 
-        jMenu2.setText("Ayuda");
+        mMenu.add(mFile);
+
+        mHelp.setText("Ayuda");
 
         mInstructions.setText("Instrucciones");
-        jMenu2.add(mInstructions);
+        mInstructions.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mInstructionsActionPerformed(evt);
+            }
+        });
+        mHelp.add(mInstructions);
 
-        mMenu.add(jMenu2);
+        mMenu.add(mHelp);
 
         setJMenuBar(mMenu);
 
@@ -296,39 +444,21 @@ public class GUI extends javax.swing.JFrame implements UI {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(linfoMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(pGame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(pGame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(pGame, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(linfoMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(pGame, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void mSaveStateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mSaveStateActionPerformed
-        // TODO add your handling code here:
+        selectedMenuOption = 3;
     }//GEN-LAST:event_mSaveStateActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void tInputNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tInputNameActionPerformed
         // TODO add your handling code here:
@@ -339,61 +469,122 @@ public class GUI extends javax.swing.JFrame implements UI {
     }//GEN-LAST:event_bSetNameActionPerformed
 
     private void bSetNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bSetNameMouseClicked
-
+        playerName = tInputName.getText();
     }//GEN-LAST:event_bSetNameMouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void bCard4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCard4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bCard4ActionPerformed
+
+    private void bCard3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCard3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bCard3ActionPerformed
+
+    private void mExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mExitActionPerformed
+        selectedMenuOption = 0;
+    }//GEN-LAST:event_mExitActionPerformed
+
+    private void mNewGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mNewGameActionPerformed
+        selectedMenuOption = 1;
+    }//GEN-LAST:event_mNewGameActionPerformed
+
+    private void mLoadStateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mLoadStateActionPerformed
+        selectedMenuOption = 4;
+    }//GEN-LAST:event_mLoadStateActionPerformed
+
+    private void mInstructionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mInstructionsActionPerformed
+        selectedMenuOption = 2;
+    }//GEN-LAST:event_mInstructionsActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JToggleButton bCard1;
+    private javax.swing.JToggleButton bCard2;
+    private javax.swing.JToggleButton bCard3;
+    private javax.swing.JToggleButton bCard4;
+    private javax.swing.JToggleButton bCard5;
+    private javax.swing.JButton bRejectCards;
     private javax.swing.JButton bSetName;
+    private javax.swing.JComboBox<String> cbBetAmount;
     private javax.swing.JDialog dPlayerName;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JToggleButton jToggleButton2;
-    private javax.swing.JToggleButton jToggleButton3;
-    private javax.swing.JToggleButton jToggleButton4;
-    private javax.swing.JToggleButton jToggleButton5;
+    private javax.swing.JLabel lBetMessage;
+    private javax.swing.JLabel lCredits;
+    private javax.swing.JLabel lCreditsIcon;
+    private javax.swing.JLabel lPlayerName;
     private javax.swing.JLabel lWelcome;
     private javax.swing.JLabel linfoMessage;
+    private javax.swing.JMenuItem mExit;
+    private javax.swing.JMenu mFile;
+    private javax.swing.JMenu mHelp;
     private javax.swing.JMenuItem mInstructions;
     private javax.swing.JMenuItem mLoadState;
     private javax.swing.JMenuBar mMenu;
+    private javax.swing.JMenuItem mNewGame;
     private javax.swing.JMenuItem mSaveState;
+    private javax.swing.JPanel pBet;
     private javax.swing.JPanel pGame;
+    private javax.swing.JPanel pHand;
+    private javax.swing.JPanel pMenu;
+    private javax.swing.JPanel pPlayer;
+    private javax.swing.JPanel pPlayerName;
     private javax.swing.JTextField tInputName;
     // End of variables declaration//GEN-END:variables
     @Override
     public void printWelcome() {
-
+        linfoMessage.setText(defaultInfoMessage);
     }
 
     @Override
     public void printMainMenu(Player player) {
-
+        playerName = "";
+        lPlayerName.setText(player.getPlayerName());
+        lCredits.setText(String.valueOf(player.getCredits()));
+        selectedMenuOption = -1;
     }
 
     @Override
     public void printInstructions() {
-
+        JOptionPane.showMessageDialog(
+                this,
+                "1. Para ganar deberás usar tu suerte tanto como puedas, comenzarás con 5 cartas y deberás hacer\n"
+                        + "combinaciones de éstas en dos oportunidades, podrás cambiar en una ocasión las cartas que quieras,\n"
+                        + "para luego con las nuevas cartas multiplicar o perder tu apuesta.\n\n"
+                        + "Podrás hacer las siguientes combinaciones de cartas:\n"
+                        + "Escalera Real: Escalera desde 10 hasta A de la misma pinta.\n"
+                        + "Escalera de Color: Cualquier escalera de la misma pinta.\n"
+                        + "Póker: Cuatro cartas del mismo número.\n"
+                        + "Full House: Un trío y un par.\n"
+                        + "Color: Cinco cartas de la misma pinta.\n"
+                        + "Escalera: Cualquier escalera de diferente pinta.\n"
+                        + "Trío: Tres cartas del mismo número.\n"
+                        + "Dos Pares: Dos pares de números con diferentes pintas.\n"
+                        + "Par: Dos cartas del mismo número.\n"
+                        + "Nada: Ninguna combinación anterior.\n\n"
+                        + "2. Comenzarás con 100 créditos que podrás apostar.\n"
+                        + "Tu apuesta se multiplicará así:\n"
+                        + "Escalera Real.................1-500\n"
+                        + "Escalera de Color.............1-200\n"
+                        + "Póker.........................1-100\n"
+                        + "Full House....................1-50\n"
+                        + "Color.........................1-20\n"
+                        + "Escalera......................1-10\n"
+                        + "Trío..........................1-3\n"
+                        + "Dos Pares.....................1-2\n"
+                        + "Par...........................1-1\n"
+                        + "Nada..........................1-0\n\n"
+                        + "Entre más créditos tengas mejores premios podrás redimir.",
+                "Instrucciones",
+                JOptionPane.INFORMATION_MESSAGE);
     }
 
     @Override
     public void printCards(Player player) {
-
-    }
-
-    @Override
-    public void printNewCards(Player player) {
 
     }
 
@@ -424,12 +615,21 @@ public class GUI extends javax.swing.JFrame implements UI {
 
     @Override
     public String askName() {
-        return "a";
+        dPlayerName.setVisible(true);
+        while(playerName.equals("")){
+            pause();
+        }
+        dPlayerName.setVisible(false);
+        this.setVisible(true);
+        return playerName;
     }
 
     @Override
     public int askMenuOption() {
-        return 1;
+        while(selectedMenuOption == -1){
+            pause();
+        }
+        return selectedMenuOption;
     }
 
     @Override
@@ -448,4 +648,17 @@ public class GUI extends javax.swing.JFrame implements UI {
         return true;
     }
     
+    private void changeHandState(boolean state){
+        for (JToggleButton handUI1 : handUI) {
+            handUI1.setEnabled(state);
+        }
+    }
+    
+    private void pause() {
+        try {
+            Thread.sleep(50);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

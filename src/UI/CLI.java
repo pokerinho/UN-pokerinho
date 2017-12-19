@@ -1,3 +1,4 @@
+
 package UI;
 
 import data.Player;
@@ -18,7 +19,7 @@ public class CLI implements UI {
     @Override
     public void printMainMenu(Player player) {
         System.out.println("\nHola " + player.getPlayerName() + " :)\n");
-        System.out.println("1. Comenzar el juego");
+        System.out.println("1. Nueva partida");
         System.out.println("2. Instrucciones");
         System.out.println("3. Guardar estado");
         System.out.println("4. Cargar estado");
@@ -60,13 +61,6 @@ public class CLI implements UI {
     public void printCards(Player player
     ) {
         System.out.println("\nTus cartas son:\n");
-        System.out.println(player.toString());
-    }
-
-    @Override
-    public void printNewCards(Player player
-    ) {
-        System.out.println("\nTus nuevas cartas son: \n");
         System.out.println(player.toString());
     }
 
@@ -138,7 +132,7 @@ public class CLI implements UI {
 
     @Override
     public int askMenuOption() throws InputMismatchException, SecurityException {
-        System.out.print("\nSelecciona una opción: \n");
+        System.out.print("\nSelecciona una opción: ");
         int option = 0;
         do {
             input = new Scanner(System.in);
@@ -166,7 +160,7 @@ public class CLI implements UI {
             input = new Scanner(System.in);
             isException = false;
             try {
-                System.out.println("¿Cuántos créditos quieres apostar?(Solo puedes ingresar multiplos de 10): ");
+                System.out.print("¿Cuántos créditos quieres apostar?(Solo puedes ingresar multiplos de 10): ");
                 bet = input.nextInt();
                 if (bet % 10 != 0) {
                     throw new SecurityException();
@@ -192,11 +186,11 @@ public class CLI implements UI {
             input = new Scanner(System.in);
             isException = false;
             try {
-                System.out.println("\n¿Desear cambiar alguna carta? (\"true\" - Sí / \"false\" - No)");
+                System.out.print("\n¿Desear cambiar alguna carta? (\"true\" - Sí / \"false\" - No)");
                 if (input.nextBoolean() == true) {
                     do {
                         isException = false;
-                        System.out.println("\n¿Cuáles cartas deseas cambiar?");
+                        System.out.print("\n¿Cuáles cartas deseas cambiar?");
                         whatReject = input.next();
                         for (int index = 0; index < whatReject.length(); index++) {
                             try {

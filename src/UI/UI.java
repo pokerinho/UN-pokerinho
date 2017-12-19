@@ -29,7 +29,6 @@ public interface UI {
     public void printMainMenu(Player player);
     public void printInstructions();
     public void printCards(Player player);
-    public void printNewCards(Player player);
     public void printCredits(Player player);
     public void printCategorizeHand(Player player);
     public void printSaved();
