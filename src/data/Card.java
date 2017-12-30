@@ -6,8 +6,8 @@ public class Card implements Comparable<Card>, Serializable{
 
     private final int suit;
     private final int value;
-    private final static String[] suits = {"♥","♦","♣","♠"}; 
-    private final static String[] values = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};											
+    private final String[] suits = {"♥","♦","♣","♠"}; 
+    private final String[] values = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};											
 		
     public Card(int s, int v) {
 	suit = s;
@@ -20,6 +20,11 @@ public class Card implements Comparable<Card>, Serializable{
 		
     public int getValue() {
 	return value;
+    }
+    
+    public String generateResourceName(){
+        String name = values[value] + "_of_" + suits[suit] + ".png";
+        return name;
     }
 		
     @Override

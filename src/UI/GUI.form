@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
     <Container class="javax.swing.JDialog" name="dPlayerName">
       <Properties>
@@ -72,16 +72,12 @@
                 <Property name="text" type="java.lang.String" value="&#xbf;Cual es tu nombre?"/>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tInputNameActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="bSetName">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Iniciar"/>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="bSetNameMouseClicked"/>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bSetNameActionPerformed"/>
               </Events>
             </Component>
@@ -288,10 +284,10 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                       <Component id="lBetMessage" min="-2" pref="68" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
-                      <Component id="cbBetAmount" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jButton3" min="-2" pref="96" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
+                      <Component id="sBetAmount" min="-2" pref="54" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="bBet" min="-2" pref="96" max="-2" attributes="0"/>
                       <EmptySpace pref="50" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -299,11 +295,11 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="25" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jButton3" alignment="3" min="-2" pref="54" max="-2" attributes="0"/>
-                          <Component id="cbBetAmount" alignment="3" min="-2" pref="54" max="-2" attributes="0"/>
+                          <Component id="bBet" alignment="3" min="-2" pref="54" max="-2" attributes="0"/>
                           <Component id="lBetMessage" alignment="3" min="-2" pref="54" max="-2" attributes="0"/>
+                          <Component id="sBetAmount" alignment="3" min="-2" pref="54" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                   </Group>
@@ -311,27 +307,14 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="jButton3">
+            <Component class="javax.swing.JButton" name="bBet">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Apostar"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JComboBox" name="cbBetAmount">
-              <Properties>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
-                    <StringItem index="0" value="Item 1"/>
-                    <StringItem index="1" value="Item 2"/>
-                    <StringItem index="2" value="Item 3"/>
-                    <StringItem index="3" value="Item 4"/>
-                  </StringArray>
-                </Property>
-                <Property name="enabled" type="boolean" value="false"/>
-              </Properties>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-              </AuxValues>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bBetActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lBetMessage">
               <Properties>
@@ -339,6 +322,14 @@
                 <Property name="text" type="java.lang.String" value="Apuesta"/>
                 <Property name="enabled" type="boolean" value="false"/>
                 <Property name="opaque" type="boolean" value="true"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JSpinner" name="sBetAmount">
+              <Properties>
+                <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                  <SpinnerModel initial="10" minimum="10" numberType="java.lang.Integer" stepSize="10" type="number"/>
+                </Property>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -479,9 +470,6 @@
                 </Property>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bCard3ActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JToggleButton" name="bCard4">
               <Properties>
@@ -490,9 +478,6 @@
                 </Property>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bCard4ActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JToggleButton" name="bCard5">
               <Properties>
@@ -507,6 +492,9 @@
                 <Property name="text" type="java.lang.String" value="Cambiar"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bRejectCardsActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -537,11 +525,11 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="67" max="32767" attributes="0"/>
-                      <Component id="jButton2" min="-2" pref="111" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                      <Component id="bNewGame" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="74" max="32767" attributes="0"/>
+                      <Component id="bExit" min="-2" pref="111" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -550,8 +538,8 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace pref="24" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jButton1" alignment="3" min="-2" pref="54" max="-2" attributes="0"/>
-                          <Component id="jButton2" alignment="3" min="-2" pref="54" max="-2" attributes="0"/>
+                          <Component id="bNewGame" alignment="3" min="-2" pref="54" max="-2" attributes="0"/>
+                          <Component id="bExit" alignment="3" min="-2" pref="54" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                   </Group>
@@ -559,18 +547,21 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="jButton1">
+            <Component class="javax.swing.JButton" name="bNewGame">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Nueva partida"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bNewGameActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton2">
+            <Component class="javax.swing.JButton" name="bExit">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Salir"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bExitActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

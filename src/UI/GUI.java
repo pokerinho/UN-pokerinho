@@ -5,6 +5,8 @@
  */
 package UI;
 
+import businessLogic.MoveHandler;
+import data.Card;
 import data.Player;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,6 +25,9 @@ public class GUI extends javax.swing.JFrame implements UI {
     private String defaultInfoMessage = "BIENVENIDO A UN POKERINHO";
     private String playerName = "";
     private int selectedMenuOption;
+    private int betAmount;
+    private boolean changed;
+    private int[] rejected = new int[5];
     private JToggleButton[] handUI;
     
     public GUI() {
@@ -62,9 +67,9 @@ public class GUI extends javax.swing.JFrame implements UI {
         lWelcome = new javax.swing.JLabel();
         pGame = new javax.swing.JPanel();
         pBet = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
-        cbBetAmount = new javax.swing.JComboBox<>();
+        bBet = new javax.swing.JButton();
         lBetMessage = new javax.swing.JLabel();
+        sBetAmount = new javax.swing.JSpinner();
         pPlayer = new javax.swing.JPanel();
         lPlayerName = new javax.swing.JLabel();
         lCredits = new javax.swing.JLabel();
@@ -78,8 +83,8 @@ public class GUI extends javax.swing.JFrame implements UI {
         bRejectCards = new javax.swing.JButton();
         linfoMessage = new javax.swing.JLabel();
         pMenu = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        bNewGame = new javax.swing.JButton();
+        bExit = new javax.swing.JButton();
         mMenu = new javax.swing.JMenuBar();
         mFile = new javax.swing.JMenu();
         mNewGame = new javax.swing.JMenuItem();
@@ -98,18 +103,8 @@ public class GUI extends javax.swing.JFrame implements UI {
         tInputName.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         tInputName.setText("¿Cual es tu nombre?");
         tInputName.setToolTipText("");
-        tInputName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tInputNameActionPerformed(evt);
-            }
-        });
 
         bSetName.setText("Iniciar");
-        bSetName.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                bSetNameMouseClicked(evt);
-            }
-        });
         bSetName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bSetNameActionPerformed(evt);
@@ -174,16 +169,21 @@ public class GUI extends javax.swing.JFrame implements UI {
         pBet.setBackground(new java.awt.Color(255, 51, 102));
         pBet.setPreferredSize(new java.awt.Dimension(384, 105));
 
-        jButton3.setText("Apostar");
-        jButton3.setEnabled(false);
-
-        cbBetAmount.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cbBetAmount.setEnabled(false);
+        bBet.setText("Apostar");
+        bBet.setEnabled(false);
+        bBet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bBetActionPerformed(evt);
+            }
+        });
 
         lBetMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lBetMessage.setText("Apuesta");
         lBetMessage.setEnabled(false);
         lBetMessage.setOpaque(true);
+
+        sBetAmount.setModel(new javax.swing.SpinnerNumberModel(10, 10, null, 10));
+        sBetAmount.setEnabled(false);
 
         javax.swing.GroupLayout pBetLayout = new javax.swing.GroupLayout(pBet);
         pBet.setLayout(pBetLayout);
@@ -192,20 +192,20 @@ public class GUI extends javax.swing.JFrame implements UI {
             .addGroup(pBetLayout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addComponent(lBetMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52)
-                .addComponent(cbBetAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(66, 66, 66)
+                .addComponent(sBetAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bBet, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(50, Short.MAX_VALUE))
         );
         pBetLayout.setVerticalGroup(
             pBetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pBetLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(25, Short.MAX_VALUE)
                 .addGroup(pBetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbBetAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lBetMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(bBet, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lBetMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sBetAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23))
         );
 
@@ -257,25 +257,20 @@ public class GUI extends javax.swing.JFrame implements UI {
 
         bCard3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/back/back_d.png"))); // NOI18N
         bCard3.setEnabled(false);
-        bCard3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bCard3ActionPerformed(evt);
-            }
-        });
 
         bCard4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/back/back_d.png"))); // NOI18N
         bCard4.setEnabled(false);
-        bCard4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bCard4ActionPerformed(evt);
-            }
-        });
 
         bCard5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/back/back_d.png"))); // NOI18N
         bCard5.setEnabled(false);
 
         bRejectCards.setText("Cambiar");
         bRejectCards.setEnabled(false);
+        bRejectCards.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bRejectCardsActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pHandLayout = new javax.swing.GroupLayout(pHand);
         pHand.setLayout(pHandLayout);
@@ -323,33 +318,38 @@ public class GUI extends javax.swing.JFrame implements UI {
 
         pMenu.setBackground(new java.awt.Color(255, 51, 102));
 
-        jButton1.setText("Nueva partida");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        bNewGame.setText("Nueva partida");
+        bNewGame.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                bNewGameActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Salir");
+        bExit.setText("Salir");
+        bExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bExitActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pMenuLayout = new javax.swing.GroupLayout(pMenu);
         pMenu.setLayout(pMenuLayout);
         pMenuLayout.setHorizontalGroup(
             pMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pMenuLayout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49))
+                .addGap(48, 48, 48)
+                .addComponent(bNewGame)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
+                .addComponent(bExit, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50))
         );
         pMenuLayout.setVerticalGroup(
             pMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pMenuLayout.createSequentialGroup()
                 .addContainerGap(24, Short.MAX_VALUE)
                 .addGroup(pMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(bNewGame, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bExit, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24))
         );
 
@@ -460,29 +460,13 @@ public class GUI extends javax.swing.JFrame implements UI {
         selectedMenuOption = 3;
     }//GEN-LAST:event_mSaveStateActionPerformed
 
-    private void tInputNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tInputNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tInputNameActionPerformed
-
     private void bSetNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSetNameActionPerformed
-        // TODO add your handling code here:
+        playerName = tInputName.getText();
     }//GEN-LAST:event_bSetNameActionPerformed
 
-    private void bSetNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bSetNameMouseClicked
-        playerName = tInputName.getText();
-    }//GEN-LAST:event_bSetNameMouseClicked
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void bCard4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCard4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bCard4ActionPerformed
-
-    private void bCard3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCard3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bCard3ActionPerformed
+    private void bNewGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bNewGameActionPerformed
+        mNewGameActionPerformed(evt);
+    }//GEN-LAST:event_bNewGameActionPerformed
 
     private void mExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mExitActionPerformed
         selectedMenuOption = 0;
@@ -500,19 +484,36 @@ public class GUI extends javax.swing.JFrame implements UI {
         selectedMenuOption = 2;
     }//GEN-LAST:event_mInstructionsActionPerformed
 
+    private void bBetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBetActionPerformed
+        betAmount = (int) sBetAmount.getValue();
+    }//GEN-LAST:event_bBetActionPerformed
+
+    private void bExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bExitActionPerformed
+        mExitActionPerformed(evt);
+    }//GEN-LAST:event_bExitActionPerformed
+
+    private void bRejectCardsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRejectCardsActionPerformed
+        for(int index = 0; index < handUI.length; index++){
+            if(handUI[index].isSelected()){
+                rejected[index] = index + 1;
+            }
+            handUI[index].setSelected(false);
+        }
+        changed = true;
+    }//GEN-LAST:event_bRejectCardsActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bBet;
     private javax.swing.JToggleButton bCard1;
     private javax.swing.JToggleButton bCard2;
     private javax.swing.JToggleButton bCard3;
     private javax.swing.JToggleButton bCard4;
     private javax.swing.JToggleButton bCard5;
+    private javax.swing.JButton bExit;
+    private javax.swing.JButton bNewGame;
     private javax.swing.JButton bRejectCards;
     private javax.swing.JButton bSetName;
-    private javax.swing.JComboBox<String> cbBetAmount;
     private javax.swing.JDialog dPlayerName;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel lBetMessage;
     private javax.swing.JLabel lCredits;
     private javax.swing.JLabel lCreditsIcon;
@@ -533,6 +534,7 @@ public class GUI extends javax.swing.JFrame implements UI {
     private javax.swing.JPanel pMenu;
     private javax.swing.JPanel pPlayer;
     private javax.swing.JPanel pPlayerName;
+    private javax.swing.JSpinner sBetAmount;
     private javax.swing.JTextField tInputName;
     // End of variables declaration//GEN-END:variables
     @Override
@@ -585,32 +587,81 @@ public class GUI extends javax.swing.JFrame implements UI {
 
     @Override
     public void printCards(Player player) {
-
+        changeHandState(true);
+        for(int i = 0; i < player.getHand().size(); i++){
+            Card card = player.getCard(i);
+            handUI[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/images/cards/" + card.generateResourceName())));
+        }
     }
 
     @Override
     public void printCredits(Player player) {
-
+        lCredits.setText(String.valueOf(player.getCredits()));
     }
 
     @Override
     public void printCategorizeHand(Player player) {
-
+        switch (MoveHandler.categorizeHand(player)) {
+            case 5000:
+                linfoMessage.setText("¡Tienes una Flor Imperial!");
+                break;
+            case 200:
+                linfoMessage.setText("¡Tienes una Escalera de Color!");
+                break;
+            case 100:
+                linfoMessage.setText("¡Tienes un Póker!");
+                break;
+            case 50:
+                linfoMessage.setText("¡Tienes un Full House!");
+                break;
+            case 20:
+                linfoMessage.setText("¡Tienes un Color!");
+                break;
+            case 10:
+                linfoMessage.setText("¡Tienes una Escalera!");
+                break;
+            case 3:
+                linfoMessage.setText("¡Tienes un Trío!");
+                break;
+            case 2:
+                linfoMessage.setText("¡Tienes dos Pares!");
+                break;
+            case 1:
+                linfoMessage.setText("¡Tienes un Par!");
+                break;
+            default:
+                linfoMessage.setText("No tienes nada");
+                break;
+        }
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        changeHandState(false);
     }
 
     @Override
     public void printSaved() {
-
+        JOptionPane.showMessageDialog(
+                this,
+                "Guardado",
+                "estado",
+                JOptionPane.INFORMATION_MESSAGE);
     }
 
     @Override
     public void printLoaded() {
-
+        JOptionPane.showMessageDialog(
+                this,
+                "Cargado",
+                "Estado",
+                JOptionPane.INFORMATION_MESSAGE);
     }
 
     @Override
     public void printError(String error) {
-
+        linfoMessage.setText(error);
     }
 
     @Override
@@ -626,6 +677,7 @@ public class GUI extends javax.swing.JFrame implements UI {
 
     @Override
     public int askMenuOption() {
+        linfoMessage.setText("Selecciona una opción");
         while(selectedMenuOption == -1){
             pause();
         }
@@ -634,13 +686,26 @@ public class GUI extends javax.swing.JFrame implements UI {
 
     @Override
     public int askBetAmount(Player player) {
-        return 1;
+        linfoMessage.setText("¿Cuántos créditos quieres apostar?");
+        changeLBetState(true);
+        betAmount = 0;
+        while(betAmount ==0){
+            pause();
+        }
+        changeLBetState(false);
+        return betAmount;
     }
 
     @Override
     public int[] askReject() {
-        int[] reject = {0, 0, 0, 0, 0};
-        return reject;
+        changed = false;
+        for(int index = 0; index < rejected.length; index++){
+            rejected[index] = 0;
+        }
+        while(!changed){
+            pause();
+        }
+        return rejected;
     }
 
     @Override
@@ -652,6 +717,13 @@ public class GUI extends javax.swing.JFrame implements UI {
         for (JToggleButton handUI1 : handUI) {
             handUI1.setEnabled(state);
         }
+        bRejectCards.setEnabled(state);
+    }
+    
+    private void changeLBetState(boolean state){
+        lBetMessage.setEnabled(state);
+        sBetAmount.setEnabled(state);
+        bBet.setEnabled(state);
     }
     
     private void pause() {

@@ -71,8 +71,7 @@ public class CLI implements UI {
     }
 
     @Override
-    public void printCategorizeHand(Player player
-    ) {
+    public void printCategorizeHand(Player player) {
         switch (MoveHandler.categorizeHand(player)) {
             case 5000:
                 System.out.println("¡Tienes una Flor Imperial!");

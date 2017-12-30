@@ -11,17 +11,17 @@ import java.io.IOException;
 
 public class GameEngine {
 
-    private static final Deck deck = new Deck();
+    private static Deck deck;
     private static Player player;
     private static UI ui;
 
     private static void selectUI(String[] args) {
         if (args.length == 0) {
             ui = new GUI();
-        } else if (args[0].equals("gui")) {
-            ui = new GUI();
-        } else {
+        } else if (args[0].equals("text")) {
             ui = new CLI();
+        } else {
+            ui = new GUI();
         }
     }
 
@@ -62,7 +62,7 @@ public class GameEngine {
                         ui.printLoaded();
                     } catch (IOException exception) {
                         ui.printError(UI.ERROR_IO);
-                    }
+                    }              
                 }
                 break;
                 case 0: {
@@ -73,6 +73,7 @@ public class GameEngine {
     }
 
     private static void startGame() {
+        deck = new Deck();
         ui.printCredits(player);
         int bet = ui.askBetAmount(player);
         player.setCredits(-bet);
@@ -95,7 +96,7 @@ public class GameEngine {
     }
 
     public static void eliminatePlayer() {
-        player = null;
+        player = new Player(player.getPlayerName(), 100);
         try {
             PlayerState.savePlayer(player, ui);
         } catch (IOException exception) {
